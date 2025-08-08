@@ -47,13 +47,6 @@ module.export("osu_to_lua", function(osu_file_contents) {
 	}
 
 	beatmap.hitObjects = beatmap.hitObjects.filter((_, i) => !_i_to_removes[i]);
-
-	append_to_output("local rtv = {}");
-	append_to_output("rtv.HitObjects = {}");
-	append_to_output("local function note(time,track) rtv.HitObjects[#rtv.HitObjects+1]={Time=time;Type=1;Track=track;} end");
-	append_to_output("local function hold(time,track,duration) rtv.HitObjects[#rtv.HitObjects+1]={Time=time;Type=2;Track=track;Duration=duration;} end");
-	append_to_output("--");
-
 	for (var i = 0; i < beatmap.hitObjects.length; i++) {
 		var obj = beatmap.hitObjects[i];
 		var track = hitobj_x_to_track_number(obj.position[0]);
@@ -64,9 +57,6 @@ module.export("osu_to_lua", function(osu_file_contents) {
 			append_to_output(format("note(%d,%d)", obj.startTime, track));
 		}
 	}
-
-	append_to_output("--");
-	append_to_output("return rtv");
 
 	return rtv_lua;
 });
