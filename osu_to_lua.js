@@ -52,9 +52,9 @@ module.export("osu_to_lua", function(osu_file_contents) {
 		var track = hitobj_x_to_track_number(obj.position[0]);
 
 		if (obj.objectName == "slider") {
-			append_to_output(format("hold(%d,%d,%d)", obj.startTime, track, obj.duration));
+			append_to_output(format("hold(%d,%d,%d);", obj.startTime, track, obj.duration));
 		} else {
-			append_to_output(format("note(%d,%d)", obj.startTime, track));
+			append_to_output(format("note(%d,%d);", obj.startTime, track));
 		}
 	}
 
